@@ -1,6 +1,0 @@
-streamlit
-pymongo
-bcrypt
-opencv-python 
-face-recognition 
-numpy 
