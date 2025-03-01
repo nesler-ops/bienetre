@@ -1,0 +1,99 @@
+/* Colores principales */
+:root {
+  --primary-color: #1e88e5; /* Azul médico */
+  --secondary-color: #4caf50; /* Verde salud */
+  --accent-color: #e1f5fe; /* Azul claro */
+  --text-color: #37474f; /* Gris oscuro para texto */
+  --light-color: #ffffff; /* Blanco */
+}
+
+/* Estilo general de la página */
+.main {
+  background-color: #f5f9ff;
+  color: var(--text-color);
+}
+
+/* Encabezado principal */
+h1 {
+  color: var(--primary-color);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+/* Subencabezados */
+h3,
+.subheader {
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-top: 1.5rem;
+}
+
+/* Párrafos */
+p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Botones de navegación */
+.stButton > button {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 500;
+  border-radius: 30px;
+  padding: 0.5rem 2rem;
+  border: none;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.stButton > button:hover {
+  background-color: #0d47a1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Servicios */
+.css-nahz7x,
+.css-1oe6wy4 {
+  background-color: #e3f2fd;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+  border-left: 4px solid var(--primary-color);
+}
+
+/* Mapa */
+iframe {
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Elementos de lista */
+ul,
+ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* Decoración para elementos con marcadores */
+[data-testid="stText"] p:has(span:first-child:is(:contains("✔"))) {
+  background-color: var(--accent-color);
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  border-left: 3px solid var(--secondary-color);
+}
+
+/* Contenedor de mapa */
+[data-testid="column"]:has(iframe) {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
