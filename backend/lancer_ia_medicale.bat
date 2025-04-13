@@ -1,3 +1,0 @@
-@echo off
-echo 🚀 Démarrage de l'assistant IA médical...
-start /min cmd /k "ollama run ALIENTELLIGENCE/medicaldiagnostictools"
