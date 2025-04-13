@@ -1,0 +1,33 @@
+fastapi
+uvicorn
+motor
+pydantic
+passlib
+bcrypt
+python-jose
+numpy
+opencv-python
+dlib
+face_recognition
+face_recognition_models
+python-multipart
+python-dotenv
+setuptools
+#npm install react-leaflet leaflet
+#npm i --save-dev @types/leaflet
+#npm install face-api.js
+#npm install lucide-react
+#pip uninstall bcrypt passlib -y
+#pip install bcrypt==4.0.1 passlib
+#npm install react-icons
+#pip install openai
+#pip install pymongo
+#pip install transformers torch
+#pip install langdetect
+#pip install transformers
+#pip install torch
+#npm install @react-oauth/google axios
+#npm install chart.js react-chartjs-2
+#npm install react-speech-recognition
+#npm i --save-dev @types/react-speech-recognition
+#uvicorn app.main:app --reload

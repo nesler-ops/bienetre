@@ -1,0 +1,35 @@
+/* 🔹 Barra de navegación horizontal */
+.dashboard-nav {
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(to right, #4a90e2, #007bff);
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 30px; /* Espaciado mayor para que la tarjeta no esté pegada */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔹 Ítems de la barra de navegación */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+}
+
+.active {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  font-weight: bold;
+}

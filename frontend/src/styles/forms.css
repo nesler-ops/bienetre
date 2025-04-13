@@ -1,0 +1,53 @@
+/* 🔹 Styles pour les formulaires */
+.form-container {
+  width: 90%;
+  max-width: 500px;
+  margin: auto;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0 4px 10px var(--shadow);
+}
+
+/* 🔹 Titre du formulaire */
+.form-container h2 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* 🔹 Champs de saisie */
+.input-field {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  outline: none;
+  transition: border 0.3s ease-in-out;
+}
+
+.input-field:focus {
+  border-color: var(--primary-color);
+}
+
+/* 🔹 Bouton de soumission */
+button.submit-btn {
+  width: 100%;
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 12px;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+button.submit-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
