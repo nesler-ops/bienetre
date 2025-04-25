@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Santé Mentale - PHQ-9</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #f3f4f6;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 56px;
+        background-color: #3b82f6;
+        color: white;
+        padding: 0 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.9rem;
+        z-index: 1000;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        overflow-x: auto;
+      }
+
+      nav img {
+        height: 30px;
+        max-width: 100px;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 80px auto 40px;
+        padding: 0 20px;
+      }
+
+      .btn-retour {
+        display: inline-block;
+        margin-bottom: 20px;
+        color: #2563eb;
+        text-decoration: underline;
+        cursor: pointer;
+        font-size: 0.95rem;
+      }
+
+      .intro,
+      .questionnaire {
+        background: white;
+        padding: 28px;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        margin-bottom: 32px;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .intro:hover,
+      .questionnaire:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+      }
+
+      .intro-icon {
+        font-size: 36px;
+        color: #ec4899;
+        vertical-align: middle;
+      }
+
+      .intro h1 {
+        display: inline-block;
+        margin-left: 12px;
+        font-size: 1.8rem;
+        color: #1f2937;
+      }
+
+      h2 {
+        color: #1f2937;
+        font-size: 1.4rem;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      label {
+        font-weight: 500;
+        color: #374151;
+      }
+
+      select {
+        padding: 10px;
+        margin-top: 5px;
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid #d1d5db;
+        background: #f9fafb;
+        font-size: 0.95rem;
+      }
+
+      button {
+        background-color: #10b981;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin-top: 25px;
+        padding: 12px 24px;
+        font-size: 1rem;
+        border-radius: 10px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        transition: 0.2s ease;
+      }
+
+      button:hover {
+        background-color: #059669;
+        transform: scale(1.03);
+      }
+
+      .result {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 8px;
+      }
+
+      .result a {
+        text-decoration: underline;
+      }
+
+      .light {
+        background: #ecfdf5;
+        color: #047857;
+      }
+
+      .moderate {
+        background: #fffbeb;
+        color: #92400e;
+      }
+
+      .severe {
+        background: #fef2f2;
+        color: #991b1b;
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+        font-size: 0.9rem;
+        color: gray;
+      }
+    </style>
+  </head>
+  <body>
+    <nav
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 56px;
+        background-color: #3b82f6;
+        color: white;
+        padding: 0 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: sans-serif;
+        font-size: 0.9rem;
+        z-index: 1000;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+      "
+    >
+      <!-- 🟦 Bloque Izquierdo: Logo -->
+      <div style="flex: 0 0 auto; display: flex; align-items: center">
+        <a
+          href="http://localhost:5173/"
+          style="display: flex; align-items: center"
+        >
+          <img
+            src="/static/BE.png"
+            alt="BIEN-ÊTRE+"
+            style="height: 30px; max-width: 100px"
+            onerror="this.style.display='none'"
+          />
+        </a>
+      </div>
+
+      <!-- 🟪 Bloque Centro: Clima -->
+      <div
+        style="
+          flex: 1;
+          text-align: center;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          padding: 0 10px;
+        "
+      >
+        <span id="weatherInfo">🌡 Chargement...</span>
+      </div>
+
+      <!-- 🟩 Bloque Derecho: Connexion -->
+      <div style="flex: 0 0 auto; display: flex; gap: 16px">
+        <a
+          href="http://localhost:5173/login"
+          style="color: white; text-decoration: none"
+          >Se connecter</a
+        >
+        <a
+          href="http://localhost:5173/register-patient"
+          style="color: white; text-decoration: none"
+          >S'inscrire</a
+        >
+      </div>
+    </nav>
+
+    <div class="container">
+      <div
+        class="btn-retour"
+        onclick="window.location.href='http://localhost:5173/'"
+      >
+        ← Retour à l'accueil
+      </div>
+
+      <div class="intro">
+        <span class="intro-icon">🧠</span>
+        <h1>Santé mentale</h1>
+        <p style="margin-top: 10px">
+          Prendre soin de sa santé mentale est aussi important que la santé
+          physique. Il est essentiel de reconnaître le stress, l'anxiété et
+          d'apprendre à les gérer.
+        </p>
+      </div>
+
+      <div class="questionnaire">
+        <h2>🧠 Questionnaire PHQ-9</h2>
+        <p style="font-size: 0.95rem; margin-bottom: 20px">
+          Au cours des deux dernières semaines, à quelle fréquence avez-vous été
+          dérangé par les problèmes suivants ?
+        </p>
+
+        <form id="phqForm">
+          <div id="questionsContainer">
+            <!-- Les questions seront générées dynamiquement ici -->
+          </div>
+          <button type="submit">✔ Évaluer maintenant</button>
+        </form>
+
+        <div id="resultat" class="result" style="display: none"></div>
+      </div>
+
+      <p class="footer">
+        ⚠️ Les résultats sont à titre informatif uniquement. Consultez un
+        professionnel en cas de doute ou de besoin.
+      </p>
+    </div>
+
+    <script>
+      // Configuration - Remplacez cette clé par votre propre clé API
+      const API_KEY = "VITE_WEATHER_API_KEY";
+
+      // Script pour l'API météo
+      const weatherSpan = document.getElementById("weatherInfo");
+
+      const fetchWeatherAndTime = async (lat, lon) => {
+        try {
+          const response = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}&lang=fr`
+          );
+          const data = await response.json();
+
+          const temp = data.main.temp.toFixed(1);
+          const desc = data.weather[0].description;
+          const city = data.name;
+          const offset = data.timezone;
+
+          const nowUTC = new Date();
+          const utcTime = nowUTC.getTime() + nowUTC.getTimezoneOffset() * 60000;
+          const local = new Date(utcTime + offset * 1000);
+          const timeStr = local.toLocaleTimeString("fr-FR", {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+
+          weatherSpan.innerHTML = `🌡 ${temp}°C – ${desc} à ${city} | 🕒 ${timeStr}`;
+        } catch (e) {
+          console.error("Erreur météo:", e);
+          weatherSpan.innerText = "🌡 Info météo non disponible";
+        }
+      };
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (pos) =>
+            fetchWeatherAndTime(pos.coords.latitude, pos.coords.longitude),
+          () => fetchWeatherAndTime(45.5017, -73.5673)
+        );
+      } else {
+        fetchWeatherAndTime(45.5017, -73.5673);
+      }
+
+      // Génération des questions du formulaire
+      const questions = [
+        "Peu d'intérêt ou de plaisir à faire les choses",
+        "Vous vous sentez déprimé, triste ou sans espoir",
+        "Difficultés à vous endormir ou à rester endormi, ou trop dormir",
+        "Fatigue ou manque d'énergie",
+        "Perte d'appétit ou trop manger",
+        "Vous sentez-vous mal dans votre peau, ou pensez que vous êtes un échec",
+        "Difficultés à vous concentrer sur des choses, comme lire le journal ou regarder la télévision",
+        "Bougez ou parlez si lentement que les autres l'ont remarqué. Ou bien, êtes-vous si agité que vous bougez beaucoup plus que d'habitude",
+        "Avez-vous eu des pensées que vous seriez mieux mort ou de vous faire du mal d'une manière ou d'une autre",
+      ];
+
+      const container = document.getElementById("questionsContainer");
+      questions.forEach((q, i) => {
+        const div = document.createElement("div");
+        div.innerHTML = `
+          <label>${i + 1}. ${q}</label>
+          <select name="q${i}" required>
+            <option value="0">Pas du tout (0)</option>
+            <option value="1">Plusieurs jours (1)</option>
+            <option value="2">Plus de la moitié des jours (2)</option>
+            <option value="3">Presque tous les jours (3)</option>
+          </select>
+          <br/><br/>
+        `;
+        container.appendChild(div);
+      });
+
+      // Gestion de la soumission du formulaire
+      document
+        .getElementById("phqForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const formData = new FormData(e.target);
+          const scores = Array.from({ length: 9 }, (_, i) =>
+            parseInt(formData.get(`q${i}`))
+          );
+
+          try {
+            const response = await fetch("http://localhost:8000/mental/phq9", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ scores }),
+            });
+
+            const data = await response.json();
+            const resultatDiv = document.getElementById("resultat");
+            resultatDiv.style.display = "block";
+
+            const niveau = data.niveau;
+            let conseils = "";
+
+            if (niveau.includes("sévère")) {
+              resultatDiv.className = "result severe";
+              conseils = `
+            🆘 Il est fortement conseillé de consulter un professionnel de santé mentale.<br/>
+            <a href="https://www.doctolib.fr/psychiatre" target="_blank">Trouver un psychiatre sur Doctolib</a>
+          `;
+            } else if (niveau.includes("modéré")) {
+              resultatDiv.className = "result moderate";
+              conseils = `
+            💡 Essayez des techniques de relaxation comme le yoga ou la méditation.<br/>
+            <a href="https://www.headspace.com/fr" target="_blank">Découvrir des méditations guidées (Headspace)</a>
+          `;
+            } else {
+              resultatDiv.className = "result light";
+              conseils = `
+            🌱 Votre état est stable. Continuez à prendre soin de votre bien-être mental.<br/>
+            <a href="https://www.petitbambou.com/fr/" target="_blank">Pratiquer la pleine conscience (Petit Bambou)</a>
+          `;
+            }
+
+            resultatDiv.innerHTML = `<strong>${data.resultat}</strong><br/><br/>${conseils}`;
+          } catch (err) {
+            console.error("Erreur formulaire:", err);
+            alert("Erreur lors de l'évaluation. Veuillez réessayer.");
+          }
+        });
+    </script>
+  </body>
+</html>
